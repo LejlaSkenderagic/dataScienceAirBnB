@@ -45,12 +45,17 @@ def missing_values_bedroom(data):
     # Assign zero bedrooms to these listings
     listings_detailed.loc[confirmed_studio_candidates, "bedrooms"] = 0
 
-    # Print results
-    print("Listings classified as studios:",
-    confirmed_studio_candidates.sum())
+    # # Print results
+    # print("Listings classified as studios:",
+    # confirmed_studio_candidates.sum())
 
-    print("Bedrooms still missing:",
-    listings_detailed["bedrooms"].isna().sum())
+    confirmed_studio_candidates.to_excel(
+        "data/processed/studio_candidates.xlsx",
+        index=False
+    )
+
+    # print("Bedrooms still missing:",
+    # listings_detailed["bedrooms"].isna().sum())
 
 remove_empty_columns(airbnb_data)
 # Access each individual dataset
