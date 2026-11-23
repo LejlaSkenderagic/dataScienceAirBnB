@@ -43,16 +43,11 @@ def missing_values_bedroom(data):
     confirmed_studio_candidates = missing_bedrooms & studio_mentioned
 
     # Assign zero bedrooms to these listings
-    listings_detailed.loc[confirmed_studio_candidates, "bedrooms"] = 0
+    listings_detailed.loc[confirmed_studio_candidates, "bedrooms"] = 1
 
     # # Print results
     # print("Listings classified as studios:",
     # confirmed_studio_candidates.sum())
-
-    confirmed_studio_candidates.to_excel(
-        "data/processed/studio_candidates.xlsx",
-        index=False
-    )
 
     # print("Bedrooms still missing:",
     # listings_detailed["bedrooms"].isna().sum())
@@ -95,12 +90,12 @@ def create_amenity_table(listings_detailed):
 def standardise_amenities(amenity_table):
 
     # 1. Load the mapping file
-    mapping = pd.read_csv("data/amenity_mapping.csv")
+    mapping = pd.read_excel("data/amenityMapping.xlsx")
 
     # 2. Create a dictionary connecting original names to standardised names
     amenity_dict = dict(zip(
         mapping["original_amenity"],
-        mapping["standardised_amenity"]
+        mapping["new_proposed_amenity"]
     ))
 
     # 3. Separate listing IDs from amenity columns
